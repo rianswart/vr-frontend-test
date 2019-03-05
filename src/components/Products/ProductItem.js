@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import NumberFormat from 'react-number-format';
 import {
     Grid,
     Card,
@@ -19,7 +20,12 @@ const ProductItem = (props) => {
                 <Grid columns={2}>
                     <Grid.Column>
                         <Header sub>Price</Header>
-                        <span>${product.price}</span>
+                        <NumberFormat
+                            value={product.price.toFixed(2)}
+                            displayType="text"
+                            thousandSeparator
+                            prefix="$"
+                        />
                     </Grid.Column>
                     <Grid.Column>
                         <Button

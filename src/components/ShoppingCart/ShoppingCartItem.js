@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import NumberFormat from 'react-number-format';
 import {
     Grid,
     Card,
@@ -36,11 +37,21 @@ const ShoppingCartItem = props => (
             <Grid columns={2}>
                 <Grid.Column>
                     <Header sub>Price</Header>
-                    <span>${props.product.price.toFixed(2)}</span>
+                    <NumberFormat
+                        value={props.product.price.toFixed(2)}
+                        displayType="text"
+                        thousandSeparator
+                        prefix="$"
+                    />
                 </Grid.Column>
                 <Grid.Column>
                     <Header sub>Sub total</Header>
-                    <span>${props.getItemSubTotal(props.product)}</span>
+                    <NumberFormat
+                        value={props.getItemSubTotal(props.product)}
+                        displayType="text"
+                        thousandSeparator
+                        prefix="$"
+                    />
                 </Grid.Column>
             </Grid>
         </Card.Content>
