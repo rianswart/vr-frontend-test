@@ -24,6 +24,13 @@ const ShoppingCartItem = props => (
                 size="mini"
                 onClick={() => props.incrementProduct(props.product)}
             />
+            <Button
+                negative
+                size="mini"
+                onClick={() => props.removeProduct(props.product)}
+            >
+                Remove
+            </Button>
         </Card.Content>
         <Card.Content extra>
             <Grid columns={2}>
@@ -45,6 +52,7 @@ ShoppingCartItem.defaultProps = {
     getItemSubTotal: null,
     incrementProduct: null,
     decrementProduct: null,
+    removeProduct: null,
 };
 
 ShoppingCartItem.propTypes = {
@@ -56,6 +64,7 @@ ShoppingCartItem.propTypes = {
     getItemSubTotal: PropTypes.func,
     incrementProduct: PropTypes.func,
     decrementProduct: PropTypes.func,
+    removeProduct: PropTypes.func,
 };
 
 export default ShoppingCartItem;

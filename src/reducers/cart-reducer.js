@@ -1,31 +1,37 @@
 import {
     INCREMENT_PRODUCT,
     DECREMENT_PRODUCT,
+    REMOVE_PRODUCT,
 } from '../actions/cart-actions';
 
-const cartWithoutItem = (cart, item) => cart.filter(
-    cartItem => cartItem.name !== item.name,
+const cartWithoutProduct = (cart, product) => cart.filter(
+    cartProduct => cartProduct.name !== product.name,
 );
 
-const itemInCart = (cart, item) => cart.filter(cartItem => cartItem.name === item.name)[0];
+const incrementProduct = (cart, product) => {
+    const cartProduct = cart.filter(currProduct => currProduct.name === product.name)[0];
 
-const incrementProduct = (cart, item) => {
-    const cartItem = itemInCart(cart, item);
-
-    return cartItem === undefined
-        ? [...cartWithoutItem(cart, item), {
-            ...item, quantity: 1,
+    return cartProduct === undefined
+        ? [...cartWithoutProduct(cart, product), {
+            ...product,
+            quantity: 1,
         }]
-        : [...cartWithoutItem(cart, item), {
-            ...cartItem, quantity: cartItem.quantity + 1,
+        : [...cartWithoutProduct(cart, product), {
+            ...cartProduct,
+            quantity: cartProduct.quantity + 1,
         }];
 };
 
-const decrementProduct = (cart, item) => (
-    item.quantity === 1
-        ? [...cartWithoutItem(cart, item)]
-        : [...cartWithoutItem(cart, item), { ...item, quantity: item.quantity - 1 }]
+const decrementProduct = (cart, product) => (
+    product.quantity === 1
+        ? [...cartWithoutProduct(cart, product)]
+        : [...cartWithoutProduct(cart, product), {
+            ...product,
+            quantity: product.quantity - 1,
+        }]
 );
+
+const removeProduct = (cart, product) => [...cartWithoutProduct(cart, product)];
 
 const cartReducer = (state = [], action) => {
     switch (action.type) {
@@ -34,6 +40,9 @@ const cartReducer = (state = [], action) => {
 
         case DECREMENT_PRODUCT:
             return decrementProduct(state, action.payload);
+
+        case REMOVE_PRODUCT:
+            return removeProduct(state, action.payload);
 
         default:
             return state;

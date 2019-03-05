@@ -23,6 +23,10 @@ class App extends Component {
         this.props.decrementProduct(product);
     }
 
+    removeProduct(product) {
+        this.props.removeProduct(product);
+    }
+
     render() {
         return (
             <Container style={{ margin: 20 }}>
@@ -47,22 +51,36 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    incrementProduct: (item) => {
-        dispatch({ type: 'INCREMENT_PRODUCT', payload: item });
+    incrementProduct: (product) => {
+        dispatch({
+            type: 'INCREMENT_PRODUCT',
+            payload: product,
+        });
     },
-    decrementProduct: (item) => {
-        dispatch({ type: 'DECREMENT_PRODUCT', payload: item });
+    decrementProduct: (product) => {
+        dispatch({
+            type: 'DECREMENT_PRODUCT',
+            payload: product,
+        });
+    },
+    removeProduct: (product) => {
+        dispatch({
+            type: 'REMOVE_PRODUCT',
+            payload: product,
+        });
     },
 });
 
 App.defaultProps = {
     incrementProduct: null,
     decrementProduct: null,
+    removeProduct: null,
 };
 
 App.propTypes = {
     incrementProduct: PropTypes.func,
     decrementProduct: PropTypes.func,
+    removeProduct: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

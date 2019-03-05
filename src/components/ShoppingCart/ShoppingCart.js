@@ -34,6 +34,7 @@ class ShoppingCart extends Component {
                             product={product}
                             incrementProduct={this.props.incrementProduct}
                             decrementProduct={this.props.decrementProduct}
+                            removeProduct={this.props.removeProduct}
                             getItemSubTotal={this.getItemSubTotal}
                         />
                     ))
@@ -50,6 +51,7 @@ ShoppingCart.defaultProps = {
     cart: [],
     incrementProduct: null,
     decrementProduct: null,
+    removeProduct: null,
 };
 
 ShoppingCart.propTypes = {
@@ -66,6 +68,7 @@ ShoppingCart.propTypes = {
     ),
     incrementProduct: PropTypes.func,
     decrementProduct: PropTypes.func,
+    removeProduct: PropTypes.func,
 };
 
 export default ShoppingCart;
