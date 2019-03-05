@@ -17,15 +17,9 @@ const addToCart = (cart, item) => {
 };
 
 const removeFromCart = (cart, item) => {
-    // console.log(cart, item);
-    // return {};
     return item.quantity === 1
         ? [...cartWithoutItem(cart, item)]
         : [...cartWithoutItem(cart, item), { ...item, quantity: item.quantity - 1 }];
-};
-
-export const getCartTotal = (state) => {
-    console.log(state);
 };
 
 const cartReducer = (state = [], action) => {

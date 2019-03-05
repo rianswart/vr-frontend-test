@@ -10,18 +10,6 @@ class App extends Component {
         super(props);
         this.addToCart = this.addToCart.bind(this);
         this.removeFromCart = this.removeFromCart.bind(this);
-        this.getGrandTotal = this.getGrandTotal.bind(this);
-        this.getItemSubTotal = this.getItemSubTotal.bind(this);
-    }
-
-    getItemSubTotal(product) {
-        return (product.price * product.quantity).toFixed(2);
-    }
-
-    getGrandTotal(cart) {
-        return cart.reduce((prev, cur) => {
-            return prev + (cur.price * cur.quantity);
-        }, 0).toFixed(2);
     }
 
     removeFromCart(product) {
@@ -38,14 +26,10 @@ class App extends Component {
                 <Grid>
                     <Grid.Row>
                         <Grid.Column width={12}>
-                            <Products
-                                {...this.props}
-                            />
+                            <Products {...this.props} />
                         </Grid.Column>
                         <Grid.Column width={4}>
-                            <ShoppingCart
-                                {...this.props}
-                            />
+                            <ShoppingCart {...this.props} />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
@@ -69,7 +53,6 @@ const mapDispatchToProps = (dispatch) => {
         removeFromCart: (item) => {
             dispatch({ type: 'REMOVE', payload: item });
         },
-        // grandTotal: getCartTotal(dispatch),
     };
 };
 

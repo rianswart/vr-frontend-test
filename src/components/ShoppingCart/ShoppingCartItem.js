@@ -8,18 +8,18 @@ const ShoppingCartItem = (props) => {
                 <Card.Header>{props.product.name}</Card.Header>
                 <Card.Description>Quantity {props.product.quantity}</Card.Description>
                 <Button
-                    icon="down chevron"
+                    icon="minus"
                     onClick={() => props.removeFromCart(props.product)}
                 />
                 <Button
-                    icon="up chevron"
+                    icon="plus"
                     onClick={() => props.addToCart(props.product)}
                 />
             </Card.Content>
             <Card.Content extra>
                 <Grid columns={2}>
                     <Grid.Column>
-                        <h4>Price: ${props.product.price}</h4>
+                        <h4>Price: ${props.product.price.toFixed(2)}</h4>
                     </Grid.Column>
                     <Grid.Column>
                         <h4>Sub total: ${props.getItemSubTotal(props.product)}</h4>

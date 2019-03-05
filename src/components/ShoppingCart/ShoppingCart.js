@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
-import { Header } from 'semantic-ui-react';
+
+import ShoppingCartHeader from './ShoppingCartHeader';
 import ShoppingCartItem from './ShoppingCartItem';
 import ShoppingCartGrandTotal from './ShoppingCartGrandTotal';
 
 class ShoppingCart extends Component {
     constructor(props) {
         super(props);
-        this.addToCart = this.addToCart.bind(this);
-        this.removeFromCart = this.removeFromCart.bind(this);
+
         this.getGrandTotal = this.getGrandTotal.bind(this);
         this.getItemSubTotal = this.getItemSubTotal.bind(this);
     }
@@ -16,41 +16,31 @@ class ShoppingCart extends Component {
         return (product.price * product.quantity).toFixed(2);
     }
 
-    getGrandTotal(cart) {
-        return cart.reduce((prev, cur) => {
+    getGrandTotal() {
+        return this.props.cart.reduce((prev, cur) => {
             return prev + (cur.price * cur.quantity);
         }, 0).toFixed(2);
     }
 
-    removeFromCart(product) {
-        this.props.removeFromCart(product);
-    }
-
-    addToCart(product) {
-        this.props.addToCart(product);
-    }
-
     render() {
+        const { cart } = this.props;
+
         return (
             <Fragment>
-                <Header as="h2">Shopping cart ({
-                    this.props.cart.length && `${this.props.cart.length} items` || 'empty'
-                })
-                </Header>
-                {
-                    this.props.cart.map(product => (
+                <ShoppingCartHeader {...this.props} />
+                { cart.length > 0
+                    ? cart.map(product => (
                         <ShoppingCartItem
                             key={product.id}
                             product={product}
-                            addToCart={this.addToCart}
-                            removeFromCart={this.removeFromCart}
+                            addToCart={this.props.addToCart}
+                            removeFromCart={this.props.removeFromCart}
                             getItemSubTotal={this.getItemSubTotal}
                         />
                     ))
+                    : <span>You don&apos;t have any items in your shopping cart</span>
                 }
-                <ShoppingCartGrandTotal
-                    grandTotal={this.getGrandTotal(this.props.cart)}
-                />
+                <ShoppingCartGrandTotal grandTotal={this.getGrandTotal} />
             </Fragment>
         );
     }

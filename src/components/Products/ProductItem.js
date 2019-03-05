@@ -17,9 +17,7 @@ const Product = (props) => {
                             primary
                             onClick={() => props.addToCart(props.product)}
                         >
-                            Add to cart (
-                            { (props.cartItem && props.cartItem.quantity) || 0 }
-                            )
+                            Add to cart
                         </Button>
                     </Grid.Column>
                 </Grid>

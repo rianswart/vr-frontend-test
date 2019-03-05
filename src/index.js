@@ -1,19 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
+
+import App from './App';
 import productsReducer from './reducers/products-reducer';
-import userReducer from './reducers/user-reducer';
 import cartReducer from './reducers/cart-reducer';
+
+import * as serviceWorker from './serviceWorker';
+
+import './index.css';
 import 'semantic-ui-css/semantic.min.css';
-// import reducer from './reducers/reducer';
 
 const allReducers = combineReducers({
     products: productsReducer,
-    user: userReducer,
     cart: cartReducer,
 });
 
@@ -43,9 +43,9 @@ const store = createStore(
                 id: 5,
             },
         ],
-        user: 'Michael',
     },
-    window.devToolsExtension && window.devToolsExtension(),
+    /* eslint-disable-next-line */
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 
 ReactDOM.render(
