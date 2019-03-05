@@ -1,28 +1,34 @@
 import React from 'react';
-import { Grid, Card, Button } from 'semantic-ui-react';
+import { Grid, Card, Button, Header } from 'semantic-ui-react';
 
 const ShoppingCartItem = (props) => {
     return (
         <Card>
             <Card.Content>
                 <Card.Header>{props.product.name}</Card.Header>
-                <Card.Description>Quantity {props.product.quantity}</Card.Description>
+            </Card.Content>
+            <Card.Content extra align="center">
                 <Button
                     icon="minus"
+                    size="mini"
                     onClick={() => props.decrementProduct(props.product)}
                 />
+                <span style={{ margin: 20 }}>{props.product.quantity}</span>
                 <Button
                     icon="plus"
+                    size="mini"
                     onClick={() => props.incrementProduct(props.product)}
                 />
             </Card.Content>
             <Card.Content extra>
                 <Grid columns={2}>
                     <Grid.Column>
-                        <h4>Price: ${props.product.price.toFixed(2)}</h4>
+                        <Header sub>Price</Header>
+                        <span>${props.product.price.toFixed(2)}</span>
                     </Grid.Column>
                     <Grid.Column>
-                        <h4>Sub total: ${props.getItemSubTotal(props.product)}</h4>
+                        <Header sub>Sub total</Header>
+                        <span>${props.getItemSubTotal(props.product)}</span>
                     </Grid.Column>
                 </Grid>
             </Card.Content>

@@ -25,10 +25,10 @@ class App extends Component {
             <Container style={{ margin: 20 }}>
                 <Grid>
                     <Grid.Row>
-                        <Grid.Column width={12}>
+                        <Grid.Column style={{ marginTop: 20 }} mobile={16} tablet={10} computer={12}>
                             <Products {...this.props} />
                         </Grid.Column>
-                        <Grid.Column width={4}>
+                        <Grid.Column style={{ marginTop: 20 }} mobile={16} tablet={6} computer={4}>
                             <ShoppingCart {...this.props} />
                         </Grid.Column>
                     </Grid.Row>

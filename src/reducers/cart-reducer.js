@@ -1,6 +1,7 @@
-// import {
-
-// } from '../actions/cart-actions';
+import {
+    INCREMENT_PRODUCT,
+    DECREMENT_PRODUCT,
+} from '../actions/cart-actions';
 
 const cartWithoutItem = (cart, item) => cart.filter(
     cartItem => cartItem.id !== item.id,
@@ -28,10 +29,10 @@ const decrementProduct = (cart, item) => {
 
 const cartReducer = (state = [], action) => {
     switch (action.type) {
-        case 'INCREMENT_PRODUCT':
+        case INCREMENT_PRODUCT:
             return incrementProduct(state, action.payload);
 
-        case 'DECREMENT_PRODUCT':
+        case DECREMENT_PRODUCT:
             return decrementProduct(state, action.payload);
 
         default:
