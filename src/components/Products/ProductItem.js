@@ -1,7 +1,13 @@
 import React from 'react';
-import { Grid, Card, Button, Header } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import {
+    Grid,
+    Card,
+    Button,
+    Header,
+} from 'semantic-ui-react';
 
-const Product = (props) => {
+const ProductItem = (props) => {
     const { product } = props;
 
     return (
@@ -29,4 +35,17 @@ const Product = (props) => {
     );
 };
 
-export default Product;
+ProductItem.defaultProps = {
+    product: {},
+    incrementProduct: null,
+};
+
+ProductItem.propTypes = {
+    product: PropTypes.shape({
+        name: PropTypes.string,
+        price: PropTypes.number,
+    }),
+    incrementProduct: PropTypes.func,
+};
+
+export default ProductItem;

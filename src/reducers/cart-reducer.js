@@ -4,10 +4,10 @@ import {
 } from '../actions/cart-actions';
 
 const cartWithoutItem = (cart, item) => cart.filter(
-    cartItem => cartItem.id !== item.id,
+    cartItem => cartItem.name !== item.name,
 );
 
-const itemInCart = (cart, item) => cart.filter(cartItem => cartItem.id === item.id)[0];
+const itemInCart = (cart, item) => cart.filter(cartItem => cartItem.name === item.name)[0];
 
 const incrementProduct = (cart, item) => {
     const cartItem = itemInCart(cart, item);
@@ -21,11 +21,11 @@ const incrementProduct = (cart, item) => {
         }];
 };
 
-const decrementProduct = (cart, item) => {
-    return item.quantity === 1
+const decrementProduct = (cart, item) => (
+    item.quantity === 1
         ? [...cartWithoutItem(cart, item)]
-        : [...cartWithoutItem(cart, item), { ...item, quantity: item.quantity - 1 }];
-};
+        : [...cartWithoutItem(cart, item), { ...item, quantity: item.quantity - 1 }]
+);
 
 const cartReducer = (state = [], action) => {
     switch (action.type) {
@@ -39,6 +39,5 @@ const cartReducer = (state = [], action) => {
             return state;
     }
 };
-
 
 export default cartReducer;

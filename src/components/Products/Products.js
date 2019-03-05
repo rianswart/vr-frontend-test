@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Card, Header } from 'semantic-ui-react';
 
-import Product from './ProductItem';
+import ProductItem from './ProductItem';
 
-const ShoppingCart = (props) => {
+const Products = (props) => {
     const { products, cart } = props;
 
     return (
@@ -12,11 +13,11 @@ const ShoppingCart = (props) => {
             <Card.Group>
                 {
                     products.map(product => (
-                        <Product
-                            key={product.id}
+                        <ProductItem
+                            key={product.name}
                             product={product}
                             incrementProduct={props.incrementProduct}
-                            cartItem={cart.filter(cartItem => cartItem.id === product.id)[0]}
+                            cartItem={cart.filter(cartItem => cartItem.name === product.name)[0]}
                         />
                     ))
                 }
@@ -25,4 +26,27 @@ const ShoppingCart = (props) => {
     );
 };
 
-export default ShoppingCart;
+Products.defaultProps = {
+    products: [],
+    cart: [],
+    incrementProduct: null,
+};
+
+Products.propTypes = {
+    products: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string,
+            price: PropTypes.number,
+        }),
+    ),
+    cart: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string,
+            price: PropTypes.number,
+            quantity: PropTypes.number,
+        }),
+    ),
+    incrementProduct: PropTypes.func,
+};
+
+export default Products;

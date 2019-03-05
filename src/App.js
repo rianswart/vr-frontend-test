@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Grid } from 'semantic-ui-react';
+
 import Products from './components/Products/Products';
 import ShoppingCart from './components/ShoppingCart/ShoppingCart';
+
 import './App.css';
 
 class App extends Component {
@@ -38,22 +41,28 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = (state, props) => {
-    return {
-        products: state.products,
-        cart: state.cart,
-    };
+const mapStateToProps = state => ({
+    products: state.products,
+    cart: state.cart,
+});
+
+const mapDispatchToProps = dispatch => ({
+    incrementProduct: (item) => {
+        dispatch({ type: 'INCREMENT_PRODUCT', payload: item });
+    },
+    decrementProduct: (item) => {
+        dispatch({ type: 'DECREMENT_PRODUCT', payload: item });
+    },
+});
+
+App.defaultProps = {
+    incrementProduct: null,
+    decrementProduct: null,
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        incrementProduct: (item) => {
-            dispatch({ type: 'INCREMENT_PRODUCT', payload: item });
-        },
-        decrementProduct: (item) => {
-            dispatch({ type: 'DECREMENT_PRODUCT', payload: item });
-        },
-    };
+App.propTypes = {
+    incrementProduct: PropTypes.func,
+    decrementProduct: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

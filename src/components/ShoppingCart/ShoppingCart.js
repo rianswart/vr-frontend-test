@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import ShoppingCartHeader from './ShoppingCartHeader';
 import ShoppingCartItem from './ShoppingCartItem';
@@ -17,9 +18,7 @@ class ShoppingCart extends Component {
     }
 
     getGrandTotal() {
-        return this.props.cart.reduce((prev, cur) => {
-            return prev + (cur.price * cur.quantity);
-        }, 0).toFixed(2);
+        return this.props.cart.reduce((prev, cur) => prev + (cur.price * cur.quantity), 0).toFixed(2);
     }
 
     render() {
@@ -31,7 +30,7 @@ class ShoppingCart extends Component {
                 { cart.length > 0
                     ? cart.map(product => (
                         <ShoppingCartItem
-                            key={product.id}
+                            key={product.name}
                             product={product}
                             incrementProduct={this.props.incrementProduct}
                             decrementProduct={this.props.decrementProduct}
@@ -45,5 +44,28 @@ class ShoppingCart extends Component {
         );
     }
 }
+
+ShoppingCart.defaultProps = {
+    product: {},
+    cart: [],
+    incrementProduct: null,
+    decrementProduct: null,
+};
+
+ShoppingCart.propTypes = {
+    product: PropTypes.shape({
+        name: PropTypes.string,
+        price: PropTypes.number,
+    }),
+    cart: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string,
+            price: PropTypes.number,
+            quantity: PropTypes.number,
+        }),
+    ),
+    incrementProduct: PropTypes.func,
+    decrementProduct: PropTypes.func,
+};
 
 export default ShoppingCart;

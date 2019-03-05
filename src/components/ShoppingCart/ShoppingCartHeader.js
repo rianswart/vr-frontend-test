@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Header } from 'semantic-ui-react';
 
 const ShoppingCartHeader = (props) => {
@@ -14,6 +15,20 @@ const ShoppingCartHeader = (props) => {
         }
         </Header>
     );
+};
+
+ShoppingCartHeader.defaultProps = {
+    cart: [],
+};
+
+ShoppingCartHeader.propTypes = {
+    cart: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string,
+            price: PropTypes.number,
+            quantity: PropTypes.number,
+        }),
+    ),
 };
 
 export default ShoppingCartHeader;
