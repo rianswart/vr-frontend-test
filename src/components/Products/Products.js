@@ -15,7 +15,7 @@ const ShoppingCart = (props) => {
                         <Product
                             key={product.id}
                             product={product}
-                            addToCart={props.addToCart}
+                            incrementProduct={props.incrementProduct}
                             cartItem={cart.filter(cartItem => cartItem.id === product.id)[0]}
                         />
                     ))

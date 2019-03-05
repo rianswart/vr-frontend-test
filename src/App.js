@@ -8,16 +8,16 @@ import './App.css';
 class App extends Component {
     constructor(props) {
         super(props);
-        this.addToCart = this.addToCart.bind(this);
-        this.removeFromCart = this.removeFromCart.bind(this);
+        this.incrementProduct = this.incrementProduct.bind(this);
+        this.decrementProduct = this.decrementProduct.bind(this);
     }
 
-    removeFromCart(product) {
-        this.props.removeFromCart(product);
+    incrementProduct(product) {
+        this.props.incrementProduct(product);
     }
 
-    addToCart(product) {
-        this.props.addToCart(product);
+    decrementProduct(product) {
+        this.props.decrementProduct(product);
     }
 
     render() {
@@ -47,11 +47,11 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToCart: (item) => {
-            dispatch({ type: 'ADD', payload: item });
+        incrementProduct: (item) => {
+            dispatch({ type: 'INCREMENT_PRODUCT', payload: item });
         },
-        removeFromCart: (item) => {
-            dispatch({ type: 'REMOVE', payload: item });
+        decrementProduct: (item) => {
+            dispatch({ type: 'DECREMENT_PRODUCT', payload: item });
         },
     };
 };

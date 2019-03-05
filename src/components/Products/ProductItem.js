@@ -15,7 +15,7 @@ const Product = (props) => {
                     <Grid.Column>
                         <Button
                             primary
-                            onClick={() => props.addToCart(props.product)}
+                            onClick={() => props.incrementProduct(props.product)}
                         >
                             Add to cart
                         </Button>

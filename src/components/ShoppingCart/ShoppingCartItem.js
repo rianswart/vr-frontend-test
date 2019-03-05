@@ -9,11 +9,11 @@ const ShoppingCartItem = (props) => {
                 <Card.Description>Quantity {props.product.quantity}</Card.Description>
                 <Button
                     icon="minus"
-                    onClick={() => props.removeFromCart(props.product)}
+                    onClick={() => props.decrementProduct(props.product)}
                 />
                 <Button
                     icon="plus"
-                    onClick={() => props.addToCart(props.product)}
+                    onClick={() => props.incrementProduct(props.product)}
                 />
             </Card.Content>
             <Card.Content extra>

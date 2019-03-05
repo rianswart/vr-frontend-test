@@ -33,8 +33,8 @@ class ShoppingCart extends Component {
                         <ShoppingCartItem
                             key={product.id}
                             product={product}
-                            addToCart={this.props.addToCart}
-                            removeFromCart={this.props.removeFromCart}
+                            incrementProduct={this.props.incrementProduct}
+                            decrementProduct={this.props.decrementProduct}
                             getItemSubTotal={this.getItemSubTotal}
                         />
                     ))
