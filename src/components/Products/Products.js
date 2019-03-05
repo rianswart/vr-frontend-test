@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Card, Header } from 'semantic-ui-react';
 
 import Product from './ProductItem';

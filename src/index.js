@@ -12,41 +12,46 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 import 'semantic-ui-css/semantic.min.css';
 
-const allReducers = combineReducers({
+const saveToLocalStorage = (state) => {
+    try {
+        const serializedState = JSON.stringify(state);
+
+        localStorage.setItem('shoppingCart', serializedState);
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+const loadFromLocalStorage = () => {
+    try {
+        const serializedState = localStorage.getItem('shoppingCart');
+
+        if (serializedState === null) {
+            return undefined;
+        }
+
+        return JSON.parse(serializedState);
+    } catch (e) {
+        console.log(e);
+        return undefined;
+    }
+};
+
+const rootReducers = combineReducers({
     products: productsReducer,
     cart: cartReducer,
 });
 
+const persistedState = loadFromLocalStorage();
+
 const store = createStore(
-    allReducers,
-    {
-        products: [
-            {
-                name: 'Sledgehammer',
-                price: 125.76,
-                id: 1,
-            }, {
-                name: 'Axe',
-                price: 190.51,
-                id: 2,
-            }, {
-                name: 'Bandsaw',
-                price: 562.14,
-                id: 3,
-            }, {
-                name: 'Chisel',
-                price: 13.9,
-                id: 4,
-            }, {
-                name: 'Hacksaw',
-                price: 19.45,
-                id: 5,
-            },
-        ],
-    },
+    rootReducers,
+    persistedState,
     /* eslint-disable-next-line */
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
+
+store.subscribe(() => saveToLocalStorage(store.getState()));
 
 ReactDOM.render(
     <Provider store={store}>
