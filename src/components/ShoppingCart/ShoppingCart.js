@@ -33,7 +33,10 @@ class ShoppingCart extends Component {
     render() {
         return (
             <Fragment>
-                <Header as="h2">Shopping cart {this.props.cart.length}</Header>
+                <Header as="h2">Shopping cart ({
+                    this.props.cart.length && `${this.props.cart.length} items` || 'empty'
+                })
+                </Header>
                 {
                     this.props.cart.map(product => (
                         <ShoppingCartItem
