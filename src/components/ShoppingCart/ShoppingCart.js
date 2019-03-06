@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Card } from 'semantic-ui-react';
 
 import ShoppingCartHeader from './ShoppingCartHeader';
 import ShoppingCartItem from './ShoppingCartItem';
@@ -27,19 +28,21 @@ class ShoppingCart extends Component {
         return (
             <Fragment>
                 <ShoppingCartHeader {...this.props} />
-                { cart.length > 0
-                    ? cart.map(product => (
-                        <ShoppingCartItem
-                            key={product.name}
-                            product={product}
-                            incrementProduct={this.props.incrementProduct}
-                            decrementProduct={this.props.decrementProduct}
-                            removeProduct={this.props.removeProduct}
-                            getItemSubTotal={this.getItemSubTotal}
-                        />
-                    ))
-                    : <span>You don&apos;t have any items in your shopping cart</span>
-                }
+                <Card.Group>
+                    { cart.length > 0
+                        ? cart.map(product => (
+                            <ShoppingCartItem
+                                key={product.name}
+                                product={product}
+                                incrementProduct={this.props.incrementProduct}
+                                decrementProduct={this.props.decrementProduct}
+                                removeProduct={this.props.removeProduct}
+                                getItemSubTotal={this.getItemSubTotal}
+                            />
+                        ))
+                        : <span>You don&apos;t have any items in your shopping cart</span>
+                    }
+                </Card.Group>
                 <ShoppingCartGrandTotal grandTotal={this.getGrandTotal} />
             </Fragment>
         );
