@@ -11,5 +11,5 @@ it('renders the shopping cart grand total', () => {
     const getGrandTotal = () => 123;
     const wrapper = mount(<ShoppingCartGrandTotal grandTotal={getGrandTotal} />);
 
-    expect(wrapper.text()).toEqual('$123');
+    expect(wrapper.text()).toEqual('Total: $123');
 });
