@@ -8,22 +8,18 @@ import {
     Header,
 } from 'semantic-ui-react';
 
+import ShoppingCartItemIncrementer from './ShoppingCartItemIncrementer';
+
 const ShoppingCartItem = props => (
     <Card>
         <Card.Content>
             <Card.Header>{props.product.name}</Card.Header>
         </Card.Content>
         <Card.Content extra align="center">
-            <Button
-                icon="minus"
-                size="mini"
-                onClick={() => props.decrementProduct(props.product)}
-            />
-            <span style={{ margin: 20 }}>{props.product.quantity}</span>
-            <Button
-                icon="plus"
-                size="mini"
-                onClick={() => props.incrementProduct(props.product)}
+            <ShoppingCartItemIncrementer
+                product={props.product}
+                incrementProduct={props.incrementProduct}
+                decrementProduct={props.decrementProduct}
             />
             <Button
                 negative
